@@ -90,10 +90,10 @@ public class Purchase {
 		
 		System.out.println("Enter in the product key you'd like to purchase: ");
 		String itemKey = input.nextLine();
-		if(!itemKey.equals("A1") || !itemKey.equals("A2") ||!itemKey.equals("A3") ||!itemKey.equals("A4") 
-			||!itemKey.equals("B1") ||!itemKey.equals("B2") ||!itemKey.equals("B3") ||!itemKey.equals("B4")
-			||!itemKey.equals("C1") ||!itemKey.equals("C2") ||!itemKey.equals("C3") ||!itemKey.equals("C4") 
-			||!itemKey.equals("D1") ||!itemKey.equals("D2") ||!itemKey.equals("D3") ||!itemKey.equals("D4")) {
+		if(!(itemKey.equals("A1") || itemKey.equals("A2") ||itemKey.equals("A3") ||itemKey.equals("A4") 
+			||itemKey.equals("B1") ||itemKey.equals("B2") ||itemKey.equals("B3") ||itemKey.equals("B4")
+			||itemKey.equals("C1") ||itemKey.equals("C2") ||itemKey.equals("C3") ||itemKey.equals("C4") 
+			||itemKey.equals("D1") ||itemKey.equals("D2") ||itemKey.equals("D3") ||itemKey.equals("D4"))) {
 			System.out.println("Invalid Key, Try again");
 			return;
 		}
@@ -108,6 +108,7 @@ public class Purchase {
 						if(itemSelected.equals("Moonpie")) {
 								if(balance >= candy.getMoonPiePrice() && candy.getMoonpiesLeft() > 0) {
 									this.candyCounter++;
+									logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - candy.getMoonPiePrice()));
 									balance -= candy.getMoonPiePrice();
 									this.totalSales += candy.getMoonPiePrice();
 									candy.completeCandyPurchase(itemSelected);
@@ -118,6 +119,7 @@ public class Purchase {
 						}else if(itemSelected.equals("Cowtales")) {
 								if(balance >= candy.getCowtalesPrice() && (candy.getCowtalesLeft() > 0)) {
 									this.candyCounter++;
+									logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - candy.getCowtalesPrice()));
 									balance -= candy.getCowtalesPrice();
 									this.totalSales += candy.getCowtalesPrice();
 									candy.completeCandyPurchase(itemSelected);
@@ -127,6 +129,7 @@ public class Purchase {
 						}else if(itemSelected.equals("Crunchie")) {
 							if(balance >= candy.getCrunchiesPrice() && (candy.getCrunchiesLeft() > 0)) {
 								this.candyCounter++;
+								logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - candy.getCrunchiesPrice()));
 								balance -= candy.getCrunchiesPrice();
 								this.totalSales += candy.getCrunchiesPrice();
 								candy.completeCandyPurchase(itemSelected);
@@ -137,6 +140,7 @@ public class Purchase {
 						}else if(itemSelected.equals("Wonka Bar")) {
 							if(balance >= candy.getWonkaBarsPrice() && (candy.getWonkaBarsLeft() > 0)) {
 								this.candyCounter++;
+								logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - candy.getWonkaBarsPrice()));
 								balance -= candy.getWonkaBarsPrice();
 								this.totalSales += candy.getWonkaBarsPrice();
 								candy.completeCandyPurchase(itemSelected);
@@ -153,6 +157,7 @@ public class Purchase {
 					if(itemSelected.equals("U-Chews")) {
 							if(balance >= gum.getUChewsPrice() && (gum.getuChewsLeft() > 0)) {
 								this.gumCounter++;
+								logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - gum.getUChewsPrice()));
 								balance -= gum.getUChewsPrice();
 								this.totalSales += gum.getUChewsPrice();
 								gum.completeGumPurchase(itemSelected);
@@ -163,6 +168,7 @@ public class Purchase {
 					}else if(itemSelected.equals("Little League Chew")) {
 							if(balance >= gum.getLittleLeaugeChewPrice() && (gum.getLittleLeaugeChewLeft() > 0)) {
 								this.gumCounter++;
+								logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - gum.getLittleLeaugeChewPrice()));
 								balance -= gum.getLittleLeaugeChewPrice();
 								this.totalSales += gum.getLittleLeaugeChewPrice();
 								gum.completeGumPurchase(itemSelected);
@@ -172,6 +178,7 @@ public class Purchase {
 					}else if(itemSelected.equals("Chiclets")) {
 						if(balance >= gum.getChicletsPrice() && (gum.getChicletsLeft() > 0)) {
 							this.gumCounter++;
+							logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - gum.getChicletsPrice()));
 							balance -= gum.getChicletsPrice();
 							this.totalSales += gum.getChicletsPrice();
 							gum.completeGumPurchase(itemSelected);
@@ -182,6 +189,7 @@ public class Purchase {
 					}else if(itemSelected.equals("Triplemint")) {
 						if(balance >= gum.getTriplemintPrice() && (gum.getTriplemintLeft() > 0)) {
 							this.gumCounter++;
+							logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - gum.getTriplemintPrice()));
 							balance -= gum.getTriplemintPrice();
 							this.totalSales += gum.getTriplemintPrice();
 							gum.completeGumPurchase(itemSelected);
@@ -198,6 +206,7 @@ public class Purchase {
 					if(itemSelected.equals("Potato Crisps")) {
 							if(balance >= chips.getPotatoCrispsPrice() && (chips.getPotatoCrispsLeft() > 0)) {
 								this.chipsCounter++;
+								logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - chips.getPotatoCrispsPrice()));
 								balance -= chips.getPotatoCrispsPrice() ;
 								this.totalSales += chips.getPotatoCrispsPrice();
 								chips.completeChipsPurchase(itemSelected);
@@ -208,6 +217,7 @@ public class Purchase {
 					}else if(itemSelected.equals("Grain Waves")) {
 							if(balance >= chips.getGrainWavesPrice() && (chips.getGrainWavesLeft() > 0)) {
 								this.chipsCounter++;
+								logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - chips.getGrainWavesPrice()));
 								balance -= chips.getGrainWavesPrice();
 								this.totalSales += chips.getGrainWavesPrice();
 								chips.completeChipsPurchase(itemSelected);
@@ -217,6 +227,7 @@ public class Purchase {
 					}else if(itemSelected.equals("Stackers")) {
 						if(balance >= chips.getStackersPrice() && (chips.getStackersLeft() > 0)) {
 							this.chipsCounter++;
+							logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - chips.getStackersPrice()));
 							balance -= chips.getStackersPrice();
 							this.totalSales += chips.getStackersPrice();
 							chips.completeChipsPurchase(itemSelected);
@@ -227,6 +238,7 @@ public class Purchase {
 					}else if(itemSelected.equals("Cloud Popcorn")) {
 						if(balance >= chips.getCloudPopcornPrice() && (chips.getCloudPopcornLeft() > 0)) {
 							this.chipsCounter++;
+							logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - chips.getCloudPopcornPrice()));
 							balance -= chips.getCloudPopcornPrice();
 							this.totalSales += chips.getCloudPopcornPrice();
 							chips.completeChipsPurchase(itemSelected);
@@ -243,6 +255,7 @@ public class Purchase {
 					if(itemSelected.equals("Cola")) {
 							if(balance >= drinks.getColaPrice() && (drinks.getColaLeft() > 0)) {
 								this.drinksCounter++;
+								logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - drinks.getColaPrice()));
 								balance -= drinks.getColaPrice();
 								this.totalSales += drinks.getColaPrice();
 								drinks.completeDrinksPurchase(itemSelected);
@@ -253,6 +266,7 @@ public class Purchase {
 					}else if(itemSelected.equals("Dr. Salt")) {
 							if(balance >= drinks.getDrSaltPrice() && (drinks.getDrSaltLeft() > 0)) {
 								this.drinksCounter++;
+								logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - drinks.getDrSaltPrice()));
 								balance -= drinks.getDrSaltPrice();
 								this.totalSales += drinks.getDrSaltPrice();
 								drinks.completeDrinksPurchase(itemSelected);
@@ -262,6 +276,7 @@ public class Purchase {
 					}else if(itemSelected.equals("Mountain Melter")) {
 						if(balance >= drinks.getMountainMelterPrice() && (drinks.getMountainMelterLeft() > 0)) {
 							this.drinksCounter++;
+							logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - drinks.getMountainMelterPrice()));
 							balance -= drinks.getMountainMelterPrice();
 							this.totalSales += drinks.getMountainMelterPrice();
 							drinks.completeDrinksPurchase(itemSelected);
@@ -272,6 +287,7 @@ public class Purchase {
 					}else if(itemSelected.equals("Heavy")) {
 						if(balance >= drinks.getHeavyPrice() && (drinks.getHeavyLeft() > 0)) {
 							this.drinksCounter++;
+							logFile(itemSelected + " " + itemKey + " $" + balance + " $" + (balance - drinks.getHeavyPrice()));
 							balance -=drinks.getHeavyPrice();
 							this.totalSales += drinks.getHeavyPrice();
 							drinks.completeDrinksPurchase(itemSelected);
@@ -290,7 +306,9 @@ public class Purchase {
 	}//End of Method
 	
 	
-	public void finishTransaction() {
+	public void finishTransaction() throws IOException {
+		
+		logFile("GIVE CHANGE $" + balance + " $" + "0.00");
 		if(balance > 0) {
 			change = balance;
 		}
