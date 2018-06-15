@@ -33,6 +33,9 @@ public class Purchase {
 	private String itemSelected;
 	private String itemType;
 	private String itemKey;
+	private int nickels;
+	private int dimes;
+	private int quarters;
 	
 	private static File logFile = new File("log.txt");
 	
@@ -314,16 +317,36 @@ public class Purchase {
 	
 	
 	public void finishTransaction() throws IOException {
+		 nickels =0;
+		 dimes = 0;
+		 quarters = 0;
+		 double totalChange =0;
+		 double quarterRemainder;
+		 double dimesRemainder;
+		
 		
 		logFile("GIVE CHANGE $" + balance + " $" + "0.00");
 		if(balance > 0) {
+			totalChange = balance;
 			change = balance;
 			balance =0;
 		}
 		
+		totalChange = Math.ceil(totalChange * 100);
+		quarterRemainder = totalChange%25;
+		quarters = (int)(totalChange/25);
+		dimesRemainder = quarterRemainder%10;
+		dimes = (int)(quarterRemainder/10);
+		nickels = (int)(dimesRemainder/5);
+		totalChange /= 100;
+		
+	
+		
 		
 		System.out.println("Transaction Completed" + '\n');
-		System.out.printf('\n' + "Your change is " + "$%.2f" + '\n' , change);
+		System.out.printf('\n' + "Your change is " + "$%.2f" + '\n' , totalChange);
+		System.out.println("Quarters: " + quarters + "   " + "Dimes "+dimes+"   " +"Nickels " + nickels);
+		
 		
 		for(int i = 0; i < candyCounter; i++) {
 			System.out.println("Munch Munch, Yum!");
@@ -373,6 +396,21 @@ public class Purchase {
 	}
 	public String getItemSelected() {
 		return itemSelected;
+	}
+
+
+	public int getNickels() {
+		return nickels;
+	}
+
+
+	public int getDimes() {
+		return dimes;
+	}
+
+
+	public int getQuarters() {
+		return quarters;
 	}
 	
 	
