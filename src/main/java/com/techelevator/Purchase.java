@@ -1,13 +1,14 @@
 package com.techelevator;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Scanner;
 
-import javax.print.DocFlavor.INPUT_STREAM;
-import javax.swing.InputMap;
+import org.mockito.asm.tree.TryCatchBlockNode;
 
 import com.techelevator.view.Menu;
 
@@ -30,6 +31,12 @@ public class Purchase {
 	
 	private Menu menu;
 	
+	private static File logFile = new File("log.txt");
+	
+	private static java.util.Date date = new java.util.Date();
+	
+	
+	
 	
 	
 
@@ -38,6 +45,7 @@ public class Purchase {
 		this.change = 0;
 		this.menu = menu;
 	}
+
 	
 	public void run() throws IOException {
 		while(true) {
@@ -58,14 +66,18 @@ public class Purchase {
 	}
 	
 	
-	public void feedMoney() {
+	public void feedMoney() throws IOException {
+		
+	
 		Scanner input = new Scanner(System.in);
 		System.out.println("How much money would you like to deposit: ");
 		deposit = input.nextDouble();
 		if(deposit > 0) {
 		balance += deposit;
+		logFile("$"+deposit + "  " + "$" + balance);
 		}else {
 			System.out.println("Invalid Deposit");
+			logFile("INVALID DEPOSIT");
 		}
 	}
 	
@@ -75,8 +87,16 @@ public class Purchase {
 		inventory.getInventory();
 		
 		
+		
 		System.out.println("Enter in the product key you'd like to purchase: ");
 		String itemKey = input.nextLine();
+		if(!itemKey.equals("A1") || !itemKey.equals("A2") ||!itemKey.equals("A3") ||!itemKey.equals("A4") 
+			||!itemKey.equals("B1") ||!itemKey.equals("B2") ||!itemKey.equals("B3") ||!itemKey.equals("B4")
+			||!itemKey.equals("C1") ||!itemKey.equals("C2") ||!itemKey.equals("C3") ||!itemKey.equals("C4") 
+			||!itemKey.equals("D1") ||!itemKey.equals("D2") ||!itemKey.equals("D3") ||!itemKey.equals("D4")) {
+			System.out.println("Invalid Key, Try again");
+			return;
+		}
 		String itemSelected = inventory.getItemSelectedMap().get(itemKey);
 		String itemType = inventory.getItemTypeMap().get(itemKey);
 		
@@ -274,6 +294,8 @@ public class Purchase {
 		if(balance > 0) {
 			change = balance;
 		}
+		
+		
 		System.out.println("Transaction Completed" + '\n');
 		System.out.printf('\n' + "Your change is " + "$%.2f" + '\n' , change);
 		
@@ -295,6 +317,16 @@ public class Purchase {
 		gumCounter = 0;
 		chipsCounter = 0;
 	}
+	
+	private static void logFile(String message) throws IOException {
+	try(PrintWriter logWriter = new PrintWriter(new FileWriter(logFile, true))){
+			logWriter.println(date.toString() + " " + message);
+		}catch(FileNotFoundException e) {
+			
+		}
+		
+	}
+
 	
 	public double getCurrentBalance() {
 		return balance;
