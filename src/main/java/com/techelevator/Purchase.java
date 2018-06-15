@@ -30,6 +30,9 @@ public class Purchase {
 	private static int chipsCounter = 0;
 	
 	private Menu menu;
+	private String itemSelected;
+	private String itemType;
+	private String itemKey;
 	
 	private static File logFile = new File("log.txt");
 	
@@ -64,6 +67,7 @@ public class Purchase {
 			}
 		}
 	}
+
 	
 	
 	public void feedMoney() throws IOException {
@@ -89,16 +93,19 @@ public class Purchase {
 		
 		
 		System.out.println("Enter in the product key you'd like to purchase: ");
-		String itemKey = input.nextLine();
+		itemKey = input.nextLine();
 		if(!(itemKey.equals("A1") || itemKey.equals("A2") ||itemKey.equals("A3") ||itemKey.equals("A4") 
 			||itemKey.equals("B1") ||itemKey.equals("B2") ||itemKey.equals("B3") ||itemKey.equals("B4")
 			||itemKey.equals("C1") ||itemKey.equals("C2") ||itemKey.equals("C3") ||itemKey.equals("C4") 
 			||itemKey.equals("D1") ||itemKey.equals("D2") ||itemKey.equals("D3") ||itemKey.equals("D4"))) {
 			System.out.println("Invalid Key, Try again");
+			itemKey =null;
+			itemSelected = null;
+			itemType = null;
 			return;
 		}
-		String itemSelected = inventory.getItemSelectedMap().get(itemKey);
-		String itemType = inventory.getItemTypeMap().get(itemKey);
+		itemSelected = inventory.getItemSelectedMap().get(itemKey);
+		itemType = inventory.getItemTypeMap().get(itemKey);
 		
 
 		//Start of Candy
@@ -311,6 +318,7 @@ public class Purchase {
 		logFile("GIVE CHANGE $" + balance + " $" + "0.00");
 		if(balance > 0) {
 			change = balance;
+			balance =0;
 		}
 		
 		
@@ -353,6 +361,20 @@ public class Purchase {
 	public double getTotalSales() {
 		return totalSales;
 	}
+	public double getChange() {
+		return change;
+	}
+	
+	public String getItemKey() {
+		return itemKey;
+	}
+	public String getItemType() {
+		return itemType;
+	}
+	public String getItemSelected() {
+		return itemSelected;
+	}
+	
 	
 	
 }
